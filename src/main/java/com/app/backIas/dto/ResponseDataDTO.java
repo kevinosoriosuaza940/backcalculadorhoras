@@ -20,6 +20,12 @@ public class ResponseDataDTO implements Serializable {
     @Column(name = "numero_semana")
     private int numero_semana;
 
+    @Column(name = "horas_normales")
+    private  int horas_normales;
+
+    @Column(name = "horas_nocturnas")
+    private int horas_nocturnas;
+
     @Column(name = "horas_normales_extras")
     private int horas_normale_sextras;
 
@@ -91,7 +97,21 @@ public class ResponseDataDTO implements Serializable {
         this.total_horas = total_horas;
     }
 
+    public int getHoras_nocturnas () {
+        return horas_nocturnas;
+    }
 
+    public void setHoras_nocturnas (int horas_nocturnas) {
+        this.horas_nocturnas = horas_nocturnas;
+    }
+
+    public int getHoras_normales () {
+        return horas_normales;
+    }
+
+    public void setHoras_normales (int horas_normales) {
+        this.horas_normales = horas_normales;
+    }
 }
 
 
