@@ -1,8 +1,6 @@
 package com.app.backIas.repository;
 
 import com.app.backIas.dto.PostDataDto;
-
-import java.util.Date;
 import java.util.List;
 
 public interface ITecnicorepository {

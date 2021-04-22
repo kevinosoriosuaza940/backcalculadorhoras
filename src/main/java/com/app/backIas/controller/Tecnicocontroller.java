@@ -9,12 +9,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET,RequestMethod.POST})
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST})
 @RequestMapping("/tecnicoservicio")
-
 
 public class Tecnicocontroller {
     @Autowired
@@ -38,9 +36,8 @@ public class Tecnicocontroller {
 
     @PostMapping("/guardar-horas")
     public ResponseEntity postHoras (@RequestParam Date fechainicio, @RequestParam Date fechafin,
-                                           @RequestParam String id_tecnico, @RequestParam String id_servicio) throws Exception {
+                                     @RequestParam String id_tecnico, @RequestParam String id_servicio) throws Exception {
         var response = tecnicoServicio.postHoras(fechainicio, fechafin, id_tecnico, id_servicio);
-        System.out.println(response);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

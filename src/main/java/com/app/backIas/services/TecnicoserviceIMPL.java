@@ -5,7 +5,6 @@ import com.app.backIas.dto.PostDataDto;
 import com.app.backIas.repository.ITecnicorepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +21,9 @@ public class TecnicoserviceIMPL implements ITecnicoService{
 
     @Override
     public List postHoras (Date fecha_inicio, Date fecha_fin, String id_tecnico, String id_servicio) throws Exception {
+
         PostDataDto post = new PostDataDto();
+
         post.setId_tecnico(id_tecnico);
         post.setId_servicio(id_servicio);
         post.setHora_inicio(fecha_inicio);
