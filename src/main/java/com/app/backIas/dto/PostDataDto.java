@@ -6,6 +6,9 @@ import java.util.Date;
 
 public class PostDataDto {
     @Id
+    @Column(name = "id_tecnico")
+    private String id_tecnico;
+
     @Column(name = "id_tipo_servicio")
     private int id_tipo_servicio;
 
@@ -45,11 +48,11 @@ public class PostDataDto {
     @Column(name = "total_horas")
     private int total_horas;
 
-    @Column(name = "id_tecnico")
-    private String id_tecnico;
+
 
     @Column(name = "id_semana")
     private int id_semana;
+
 
     public int getId_tipo_servicio () {
         return id_tipo_servicio;

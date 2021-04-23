@@ -37,7 +37,10 @@ public class TecnicorepositoryIMPL implements ITecnicorepository {
 
     @Override
     public List getHoras (String idTecnico, int numeroSemana) throws Exception {
+
         try {
+
+
             String queryHoras =
                     "select ST.id_tecnico, S.numero_semana, SUM(H.horas_normales_extras) as horas_normales_extras, \n" +
                     "SUM(H.horas_normales) as horas_normales,\n" +
@@ -53,7 +56,7 @@ public class TecnicorepositoryIMPL implements ITecnicorepository {
             Query query = em.createNativeQuery(queryHoras, ResponseDataDTO.class);
             query.setParameter("id_tecnico", idTecnico);
             query.setParameter("numero_semana", numeroSemana);
-
+            System.out.println(idTecnico+"revisando ahssajhsahjshjsahjsasasasakjkjsajksa");
             return query.getResultList();
         } catch (Exception e) {
             throw new Exception("Error en el metodo getHoras repository: " + e);
@@ -108,6 +111,28 @@ public class TecnicorepositoryIMPL implements ITecnicorepository {
             query.setParameter("total_horas", post.getTotal_horas());
 
             return getHoras(post.getId_tecnico(), post.getNumero_semana());
+        } catch (Exception e) {
+            throw new Exception("Error en el metodo getHoras repository: " + e);
+        }
+    }
+
+    @Override
+    public List totalHorasSemana (String idTecnico, int numeroSemana) throws Exception {
+        try {
+            String queryHoras =
+                    "select \n" +
+                            "SUM(H.total_horas) as total_horas\n" +
+                            "from \n" +
+                            "Horas H \n" +
+                            "inner join Dia D on H.id_horas = D.id_dia\n" +
+                            "inner join Semana S on D.id_dia = S.id_semana\n" +
+                            "inner join ServicioTecnico ST on ST.id_semana = ST.id_semana\n" +
+                            "where id_tecnico = :id_tecnico and numero_semana = :numero_semana";
+            Query query = em.createNativeQuery(queryHoras, ResponseDataDTO.class);
+            query.setParameter("id_tecnico", idTecnico);
+            query.setParameter("numero_semana", numeroSemana);
+
+            return query.getResultList();
         } catch (Exception e) {
             throw new Exception("Error en el metodo getHoras repository: " + e);
         }

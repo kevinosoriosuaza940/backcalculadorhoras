@@ -20,7 +20,7 @@ public class TecnicoserviceIMPL implements ITecnicoService{
     }
 
     @Override
-    public List postHoras (Date fecha_inicio, Date fecha_fin, String id_tecnico, String id_servicio) throws Exception {
+    public List postHoras (Date fecha_inicio, Date fecha_fin, String id_tecnico, String id_servicio, int horas) throws Exception {
 
         PostDataDto post = new PostDataDto();
 
@@ -40,5 +40,10 @@ public class TecnicoserviceIMPL implements ITecnicoService{
         post.setId_semana(0);
 
         return tecnicoRepository.postHoras(post);
+    }
+
+    @Override
+    public List totalHorasSemana (String idTecnico, int numeroSemana) throws Exception {
+        return tecnicoRepository.totalHorasSemana(idTecnico, numeroSemana);
     }
 }

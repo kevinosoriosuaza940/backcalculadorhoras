@@ -6,5 +6,9 @@ import java.util.List;
 public interface ITecnicoService {
     List getHoras(String idTecnico, int numeroSemana) throws Exception;
 
-    List postHoras(Date fecha_inicio, Date fecha_fin, String id_tecnico, String id_servicio) throws Exception;
+    List postHoras(Date fecha_inicio, Date fecha_fin, String id_tecnico, String id_servicio,int horas) throws Exception;
+
+    List totalHorasSemana (String idTecnico, int numeroSemana) throws Exception;
+
+
 }

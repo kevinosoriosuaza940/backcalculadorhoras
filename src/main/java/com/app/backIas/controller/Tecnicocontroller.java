@@ -1,5 +1,7 @@
 package com.app.backIas.controller;
 
+import com.app.backIas.business.Contadorhoras;
+import com.app.backIas.dto.RequestDataDTO;
 import com.app.backIas.dto.ResponseDataDTO;
 import com.app.backIas.services.ITecnicoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST})
@@ -35,9 +38,20 @@ public class Tecnicocontroller {
 
 
     @PostMapping("/guardar-horas")
-    public ResponseEntity postHoras (@RequestParam Date fechainicio, @RequestParam Date fechafin,
-                                     @RequestParam String id_tecnico, @RequestParam String id_servicio) throws Exception {
-        var response = tecnicoServicio.postHoras(fechainicio, fechafin, id_tecnico, id_servicio);
+    public ResponseEntity postHoras (@RequestBody RequestDataDTO requestPostDTO) throws Exception {
+        ControlDate dcd = new ControlDate();
+        Date horafechainicio =  dcd.formatDate(requestPostDTO.getHora_inicio());
+        Date horafechafin =  dcd.formatDate(requestPostDTO.getHora_fin());
+        List totalHoras = tecnicoServicio.totalHorasSemana(requestPostDTO.getId_tecnico(), Contadorhoras.calculatesemanaaño(horafechainicio));
+
+        int horas = Integer.parseInt(totalHoras.get(0).toString());
+        System.out.println(totalHoras);
+
+        var response = tecnicoServicio.postHoras(horafechainicio, horafechafin, requestPostDTO.getId_tecnico(), requestPostDTO.getId_servicio(),horas);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
-}
+    }
+
+
+
+
